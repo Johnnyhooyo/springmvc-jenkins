@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <jmxConfigurator/>
+
+    <property name="rootLogger.path" value="/opt/hyq/logs/tomcat/app/${tomcat_app_base}"/>
+
+    <appender name="FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${rootLogger.path}/pbs-web.log
+        </File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${rootLogger.path}/pbs-web.%d{yyyy-MM-dd}-%i.log
+            </FileNamePattern>
+            <!--最多保留7天的日志-->
+            <maxHistory>7</maxHistory>
+            <!--每天的日志按照50M切割-->
+            <maxFileSize>50MB</maxFileSize>
+        </rollingPolicy>
+        <layout>
+            <Pattern>%-20(%d{HH:mm:ss.SSS} [%thread] %X{PtxId}) %-5level %logger{32} - %msg%n</Pattern>
+        </layout>
+    </appender>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %X{PtxId} %-5level %logger{36} - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <!-- 自定义包日志级别 -->
+
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
