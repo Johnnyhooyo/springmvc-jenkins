@@ -9,3 +9,5 @@ out
 gen
 target/
 jenkins-web/target/
+jenkins-service/target/
+jenkins-dao/target/
